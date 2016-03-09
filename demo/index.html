@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WebRTC</title>
+
+	<style type="text/css">
+		#video {
+			background: #f2f2f2;
+			cursor: pointer;
+		}
+
+		table {
+			width: 100%;
+			text-align: center;
+		}
+
+		table th {
+			width: 14.2%;
+		}
+	</style>
+</head>
+<body>
+	<p>The receiver and sender peer establish a local connection in the current window.</p>
+
+	<video muted autoplay id="video" width="400" height="300"></video>
+
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Upload (bytes/sec)</th>
+				<th>Download (bytes/sec)</th>
+				<th>Bytes sent</th>
+				<th>Bytes received</th>
+				<th>RTT</th>
+				<th>Packets lost</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Receiver</td>
+				<td id="receiver-upload">0</td>
+				<td id="receiver-download">0</td>
+				<td id="receiver-bytes-sent">0</td>
+				<td id="receiver-bytes-received">0</td>
+				<td id="receiver-rtt">0</td>
+				<td id="receiver-packets-lost">0</td>
+			</tr>
+			<tr>
+				<td>Sender</td>
+				<td id="sender-upload">0</td>
+				<td id="sender-download">0</td>
+				<td id="sender-bytes-sent">0</td>
+				<td id="sender-bytes-received">0</td>
+				<td id="sender-rtt">0</td>
+				<td id="sender-packets-lost">0</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<script type="text/javascript" src="bundle.js"></script>
+</body>
+</html>
