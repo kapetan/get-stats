@@ -6,14 +6,16 @@ Basic RTCPeerConnection statistics. See the [live demo](https://kapetan.github.i
 
 # Usage
 
-The exposed function takes a `RTCPeerConnection` instance as first argument and an optional array of media tracks as second argument. If a track array is not provided, statistics for all available tracks, from both local and remote media streams, are accumulated into a single report.
+The exposed constructor takes a `RTCPeerConnection` instance as first argument and an optional array of media tracks as second argument. If a track array is not provided, statistics for all available tracks, from both local and remote media streams, are accumulated into a single report.
+
+The constructor returns a function which must be called with a callback to get the report.
 
 ```javascript
-var getStats = require('get-stats');
-
 var pc = new RTCPeerConnection();
 
-getStats(pc, function(err, report) {
+var getStats = require('get-stats')(pc);
+
+getStats(function(err, report) {
 	if(err) throw err;
 	console.log(report);
 });
@@ -38,15 +40,18 @@ The generated report will look something like the following.
 For example to get only the upload statistics for a connection, the local media streams can be passed to the `getStats` function.
 
 ```javascript
-getStats(pc, pc.getLocalStreams(), function(err, report) {
+var getStats = require('get-stats')(pc, pc.getLocalStreams());
+
+getStats(function(err, report) {
 	if(err) throw err;
 	console.log('upload speed', report.upload);
 });
 
 // Get report for only the video track
 var videoTrack = pc.getLocalStreams()[0].getVideoTracks()[0];
+var getStats = require('get-stats')(pc, videoTrack);
 
-getStats(pc, videoTrack, function(err, report) {
+getStats(function(err, report) {
 	if(err) throw err;
 	console.log('upload speed', report.upload);
 });

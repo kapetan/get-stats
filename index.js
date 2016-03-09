@@ -56,7 +56,12 @@ var getTrackStats = function(pc, track, callback) {
 	});
 };
 
-module.exports = function(pc, input) {
+module.exports = function(pc, input, callback) {
+	if(!callback && typeof input === 'function') {
+		callback = input;
+		input = null;
+	}
+
 	if(!input) input = pc.getLocalStreams().concat(pc.getRemoteStreams());
 	else input = Array.isArray(input) ? input : [input];
 
@@ -70,7 +75,7 @@ module.exports = function(pc, input) {
 		else tracks.push(i);
 	});
 
-	return function(callback) {
+	var accumulate = function(callback) {
 		var count = tracks.length;
 		var errored = false;
 		var acc = {};
@@ -105,4 +110,7 @@ module.exports = function(pc, input) {
 			});
 		});
 	};
+
+	if(callback) accumulate(callback);
+	return accumulate;
 };
