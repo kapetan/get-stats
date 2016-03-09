@@ -1,6 +1,6 @@
 # get-stats
 
-Get basic statistics for a RTCPeerConnection. See the [live demo](https://kapetan.github.io/get-stats/demo/index.html).
+Basic RTCPeerConnection statistics. See the [live demo](https://kapetan.github.io/get-stats/demo/index.html).
 
 	npm install get-stats
 
