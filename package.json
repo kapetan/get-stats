@@ -1,6 +1,6 @@
 {
   "name": "get-stats",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic RTCPeerConnection statistics",
   "main": "index.js",
   "scripts": {
