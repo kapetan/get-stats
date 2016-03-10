@@ -69,6 +69,11 @@ module.exports = function(pc, input, callback) {
 	var latest = null;
 	var upload = speedometer();
 	var download = speedometer();
+	var packets = speedometer();
+
+	var valueOf = function(name) {
+		return latest ? latest[name] : 0;
+	};
 
 	input.forEach(function(i) {
 		if(i instanceof MediaStream) tracks = tracks.concat(i.getVideoTracks(), i.getAudioTracks());
@@ -100,8 +105,9 @@ module.exports = function(pc, input, callback) {
 				if(!--count) {
 					if(rttCount) acc.rtt = acc.rtt / rttCount;
 					acc.timestamp = ts;
-					acc.upload = upload(acc.bytesSent - (latest ? latest.bytesSent : 0));
-					acc.download = download(acc.bytesReceived - (latest ? latest.bytesReceived : 0));
+					acc.bytesSentSpeed = upload(acc.bytesSent - valueOf('bytesSent'));
+					acc.bytesReceivedSpeed = download(acc.bytesReceived - valueOf('bytesReceived'));
+					acc.packetsLostSpeed = packets(acc.packetsLost - valueOf('packetsLost'));
 
 					latest = acc;
 

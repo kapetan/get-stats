@@ -31,9 +31,10 @@ The generated report will look something like the following.
 	packetsReceived: 852,
 	packetsLost: 0,
 	timestamp: Date(),
-	rtt: 4,                  // round trip time
-	upload: 45386,           // upload speed in bytes/second
-	download: 53166.6        // download speed in bytes/second
+	rtt: 4,                         // round trip time
+	bytesSentSpeed: 45386,          // upload speed in bytes/second
+	bytesReceivedSpeed: 53166.6,    // download speed in bytes/second
+	packetsLostSpeed: 0             // average packet lost over the measured period
 }
 ```
 
@@ -44,7 +45,7 @@ var getStats = require('get-stats')(pc, pc.getLocalStreams());
 
 getStats(function(err, report) {
 	if(err) throw err;
-	console.log('upload speed', report.upload);
+	console.log('upload speed', report.bytesSentSpeed);
 });
 
 // Get report for only the video track
@@ -53,7 +54,7 @@ var getStats = require('get-stats')(pc, videoTrack);
 
 getStats(function(err, report) {
 	if(err) throw err;
-	console.log('upload speed', report.upload);
+	console.log('upload speed', report.bytesSentSpeed);
 });
 ```
 
