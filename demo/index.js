@@ -3,6 +3,11 @@ var getStats = require('../');
 
 var getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).bind(navigator);
 var webkit = !!navigator.webkitGetUserMedia;
+var adapter = (/[\?&]adapter[=&]?/).test(location.search);
+
+if(adapter) {
+	require('webrtc-adapter-test');
+}
 
 var sender = null;
 var receiver = null;

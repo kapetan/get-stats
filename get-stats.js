@@ -1,4 +1,4 @@
-var webkit = !!window.webkitRTCPeerConnection && !window.RTCPeerConnection;
+var webkit = !!window.webkitRTCPeerConnection;
 
 module.exports = function(pc, track, callback) {
 	var onerror = function(e) {
