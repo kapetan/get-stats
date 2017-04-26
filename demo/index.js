@@ -6,7 +6,7 @@ var webkit = !!navigator.webkitGetUserMedia;
 var adapter = (/[\?&]adapter[=&]?/).test(location.search);
 
 if(adapter) {
-	require('webrtc-adapter-test');
+	require('webrtc-adapter');
 }
 
 var sender = null;

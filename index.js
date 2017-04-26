@@ -39,14 +39,14 @@ var getTrackStats = function(pc, track, callback) {
 				result.timestamp = new Date(report.timestamp);
 				result.packetsLost = parseInt(report.packetsLost, 10);
 			}
-			if(report.type === 'inboundrtp') {
-				result.rtt = report.mozRtt || 0;
+			if(report.type === 'inboundrtp' || report.type === 'inbound-rtp') {
+				result.rtt = report.roundTripTime != null ? report.roundTripTime : (report.mozRtt || 0);
 				result.timestamp = new Date(report.timestamp);
 				result.packetsLost = report.packetsLost;
 				result.bytesReceived = report.bytesReceived;
 				result.packetsReceived = report.packetsReceived;
 			}
-			if(report.type === 'outboundrtp') {
+			if(report.type === 'outboundrtp' || report.type === 'outbound-rtp') {
 				result.bytesSent = report.bytesSent;
 				result.packetsSent = report.packetsSent;
 			}
